@@ -12,16 +12,8 @@
 
 /* ==========================================================================
    KATARU DESIGN SYSTEM & STYLESHEET
-   Design Read: B2C café landing + digital menu for Jakarta's urban late-night crowd,
-   warm-modern Japanese artisanal aesthetic, ENERGY 2 / RHYTHM 2 / MOTION 2.
    ========================================================================== */
 
-/* 
-   R-31 WRITTEN REASON FOR PALETTE:
-   Primary Dark (#1E3A2F / #234E3E) evokes Japanese matcha tea craftsmanship and calm late-night intimacy.
-   Warm cream (#F9F8F5) mimics artisanal washi paper and morning latte steam.
-   Terracotta accent (#A04332) offers an organic, earthy contrast without generic AI neon hues.
-*/
 :root {
   --color-primary-dark: #1E3A2F;
   --color-primary-forest: #234E3E;
@@ -38,26 +30,15 @@
   --color-gold: #D4AF37;
   --color-rec-tint: rgba(30, 58, 47, 0.1);
 
-  /* 
-     R-31 WRITTEN REASON FOR TYPOGRAPHY:
-     Playfair Display brings editorial elegance, warmth, and artisanal storytelling to headings.
-     Plus Jakarta Sans delivers optimal legibility for dense menu items, pricing, and UI controls.
-  */
   --font-heading: 'Playfair Display', Georgia, serif;
   --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 
-  /* 
-     R-31 WRITTEN REASON FOR BORDER RADII:
-     16px cards give soft welcoming warmth; 8px buttons/inputs provide tactile precision;
-     pill shapes highlight quick toggles and chips; 4px badges maintain crisp informational tags.
-  */
   --radius-card: 16px;
   --radius-btn: 8px;
   --radius-input: 8px;
   --radius-pill: 9999px;
   --radius-badge: 4px;
 
-  /* Elevations supporting visual hierarchy */
   --shadow-sm: 0 2px 8px rgba(30, 58, 47, 0.06);
   --shadow-md: 0 8px 24px rgba(30, 58, 47, 0.08);
   --shadow-lg: 0 16px 36px rgba(30, 58, 47, 0.14);
@@ -113,23 +94,16 @@ a {
   text-decoration: none;
 }
 
-/* 
-   R-32 KEYBOARD ACCESSIBILITY:
-   Visible focus indicator (2.5px terracotta outline with 2px offset).
-*/
 *:focus-visible {
   outline: 2.5px solid var(--color-accent) !important;
   outline-offset: 2px !important;
 }
 
-/* 
-   LANGUAGE SYSTEM:
-   Zero-lag display switching based on documentElement lang attribute.
-*/
+/* Language System */
 html[lang="id"] .en-only { display: none !important; }
 html[lang="en"] .id-only { display: none !important; }
 
-/* Container & Layout Utilities */
+/* Utilities */
 .container {
   width: 100%;
   max-width: 1200px;
@@ -165,11 +139,7 @@ html[lang="en"] .id-only { display: none !important; }
   line-height: 1.7;
 }
 
-/* ==========================================================================
-   NAVBAR
-   R-31: Fixed top bar starting transparent on hero, changing to cream with
-   subtle shadow on scroll. Provides immediate orientation and reservation CTA.
-   ========================================================================== */
+/* Navbar */
 .navbar {
   position: fixed;
   top: 0;
@@ -318,6 +288,7 @@ html[lang="en"] .id-only { display: none !important; }
   height: 44px;
   border-radius: var(--radius-btn);
   color: inherit;
+  z-index: 1001;
 }
 
 .hamburger-line {
@@ -339,27 +310,33 @@ html[lang="en"] .id-only { display: none !important; }
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* Mobile Slide-down Drawer */
+/* Mobile Slide-down Drawer Fix */
 .mobile-nav-drawer {
-  display: none;
   position: fixed;
   top: 76px;
   left: 0;
-  right: 0;
+  width: 100%;
+  height: auto;
+  max-height: calc(100vh - 76px);
+  overflow-y: auto;
   background-color: #1E3A2F;
   color: #F9F8F5;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   padding: 24px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-  transform: translateY(-100%);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  transform: translateY(-120%);
   opacity: 0;
-  transition: transform var(--transition-smooth), opacity var(--transition-smooth);
-  z-index: 999;
+  pointer-events: none;
+  visibility: hidden;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease, visibility 0.35s;
+  z-index: 9999;
 }
 
 .mobile-nav-drawer.open {
   transform: translateY(0);
   opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
 }
 
 .mobile-nav-links {
@@ -384,11 +361,7 @@ html[lang="en"] .id-only { display: none !important; }
   gap: 16px;
 }
 
-/* ==========================================================================
-   HERO SECTION (#hero)
-   R-31: Dark atmospheric green palette with subtle grain creates an intimate,
-   late-night Japanese coffeehouse sanctuary.
-   ========================================================================== */
+/* Hero Section */
 .hero-section {
   position: relative;
   min-height: 100vh;
@@ -401,7 +374,6 @@ html[lang="en"] .id-only { display: none !important; }
   overflow: hidden;
 }
 
-/* Subtle SVG Grain overlay */
 .hero-grain {
   position: absolute;
   top: 0;
@@ -421,7 +393,6 @@ html[lang="en"] .id-only { display: none !important; }
   margin: 0 auto;
 }
 
-/* Social Proof Pill */
 .social-proof-pill {
   display: inline-flex;
   align-items: center;
@@ -464,10 +435,6 @@ html[lang="en"] .id-only { display: none !important; }
   flex-wrap: wrap;
 }
 
-/* 
-   R-15 CTAs:
-   Explicit, product-tailored labels ("Explore Menu", "Book a Table").
-*/
 .btn-primary-hero {
   background-color: var(--color-accent);
   color: #FFFFFF;
@@ -508,7 +475,6 @@ html[lang="en"] .id-only { display: none !important; }
   transform: translateY(-2px);
 }
 
-/* Floating Scroll Indicator */
 .hero-scroll-indicator {
   position: absolute;
   bottom: 28px;
@@ -530,12 +496,7 @@ html[lang="en"] .id-only { display: none !important; }
   50% { transform: translate(-50%, 8px); }
 }
 
-/* ==========================================================================
-   STORY SECTION (#story)
-   R-31: Two-column narrative composition. Left column conveys heartfelt brand
-   origins; right column hosts an atmospheric quote card with the single allowed
-   glassmorphism accent (R-10 compliance).
-   ========================================================================== */
+/* Story Section */
 .story-section {
   padding: 110px 0;
   background-color: var(--color-bg);
@@ -582,11 +543,6 @@ html[lang="en"] .id-only { display: none !important; }
   line-height: 1.5;
 }
 
-/* 
-   R-10 GLASSMORPHISM DOSE CAP (1 ELEMENT ONLY):
-   The story quote card uses backdrop blur to evoke a quiet evening window
-   view into the cozy Tanjung Duren café.
-*/
 .story-card-glass {
   background: rgba(35, 78, 62, 0.92);
   backdrop-filter: blur(12px);
@@ -632,12 +588,7 @@ html[lang="en"] .id-only { display: none !important; }
   z-index: 2;
 }
 
-/* ==========================================================================
-   MENU SECTION (#menu)
-   R-31: Clean white background for crisp food and beverage legibility.
-   Structured tabs (ARIA tablist), real-time search, scrollable category chips,
-   and dynamic variant selectors.
-   ========================================================================== */
+/* Menu Section */
 .menu-section {
   padding: 100px 0;
   background-color: #FFFFFF;
@@ -650,7 +601,6 @@ html[lang="en"] .id-only { display: none !important; }
   margin-bottom: 40px;
 }
 
-/* Tab Bar with ARIA Support */
 .menu-tabs-wrapper {
   display: flex;
   justify-content: center;
@@ -682,7 +632,6 @@ html[lang="en"] .id-only { display: none !important; }
   box-shadow: 0 4px 12px rgba(30, 58, 47, 0.15);
 }
 
-/* Search Input */
 .menu-controls {
   display: flex;
   flex-direction: column;
@@ -747,7 +696,6 @@ html[lang="en"] .id-only { display: none !important; }
   display: flex;
 }
 
-/* Horizontal Filter Chips */
 .filter-chips-container {
   overflow-x: auto;
   white-space: nowrap;
@@ -794,7 +742,6 @@ html[lang="en"] .id-only { display: none !important; }
   border-color: var(--color-primary-forest);
 }
 
-/* Menu Grid */
 .menu-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -802,10 +749,6 @@ html[lang="en"] .id-only { display: none !important; }
   margin-top: 16px;
 }
 
-/* 
-   R-31 CARD COMPOSITION:
-   16px card fill with crisp border and subtle elevation separates each dish.
-*/
 .menu-card {
   background-color: #FFFFFF;
   border: 1px solid var(--color-border);
@@ -849,11 +792,6 @@ html[lang="en"] .id-only { display: none !important; }
   align-items: center;
 }
 
-/* 
-   R-09 BADGES:
-   Small rectangles (4px radius), no glow, no dot.
-   NEW = terracotta tint. Recommended = dark green tint.
-*/
 .badge {
   font-size: 0.6875rem;
   font-weight: 700;
@@ -890,7 +828,6 @@ html[lang="en"] .id-only { display: none !important; }
   margin-bottom: 16px;
 }
 
-/* Variant & Size Selector */
 .variant-selector-wrapper {
   margin-bottom: 16px;
   padding-top: 10px;
@@ -962,7 +899,6 @@ html[lang="en"] .id-only { display: none !important; }
   transform: translateY(-1px);
 }
 
-/* Add-ons Section */
 .addons-section {
   margin-top: 56px;
   padding: 32px;
@@ -1042,10 +978,6 @@ html[lang="en"] .id-only { display: none !important; }
   border-color: var(--color-primary-dark);
 }
 
-/* 
-   R-27 EMPTY STATE:
-   Displayed when search or filter returns zero items.
-*/
 .menu-empty-state {
   display: none;
   text-align: center;
@@ -1086,11 +1018,7 @@ html[lang="en"] .id-only { display: none !important; }
   min-height: 40px;
 }
 
-/* ==========================================================================
-   FLOATING CART BAR & DRAWER
-   R-31: A compact bottom pill surfaces immediate order summary and triggers
-   a slide-up drawer for adjusting quantities or checking out via WhatsApp.
-   ========================================================================== */
+/* Floating Cart */
 .floating-cart-bar {
   position: fixed;
   bottom: 24px;
@@ -1159,7 +1087,6 @@ html[lang="en"] .id-only { display: none !important; }
   gap: 4px;
 }
 
-/* Cart Drawer Backdrop */
 .cart-drawer-overlay {
   position: fixed;
   top: 0;
@@ -1179,7 +1106,6 @@ html[lang="en"] .id-only { display: none !important; }
   pointer-events: auto;
 }
 
-/* Cart Drawer Panel */
 .cart-drawer {
   position: fixed;
   bottom: 0;
@@ -1364,11 +1290,7 @@ html[lang="en"] .id-only { display: none !important; }
   color: var(--color-muted);
 }
 
-/* ==========================================================================
-   RESERVATION MODAL
-   R-31: Accessible dialog with focus trapping and ESC-key dismissal.
-   Features field validation, area selection cards, and direct WhatsApp formatting.
-   ========================================================================== */
+/* Modal */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -1492,7 +1414,6 @@ html[lang="en"] .id-only { display: none !important; }
   background-color: #FEF2F2 !important;
 }
 
-/* Area Radio Cards */
 .area-selection-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1553,7 +1474,6 @@ html[lang="en"] .id-only { display: none !important; }
   transform: translateY(-1px);
 }
 
-/* Shake animation on validation error */
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
   20%, 60% { transform: translateX(-6px); }
@@ -1564,11 +1484,7 @@ html[lang="en"] .id-only { display: none !important; }
   animation: shake 0.4s ease-in-out;
 }
 
-/* ==========================================================================
-   LOCATION SECTION (#location)
-   R-31: Immersive dark green (#1E3A2F) environment pairing clear hours
-   and contact links with an embedded Google Map of Tanjung Duren.
-   ========================================================================== */
+/* Location Section */
 .location-section {
   padding: 110px 0;
   background-color: var(--color-primary-dark);
@@ -1597,7 +1513,6 @@ html[lang="en"] .id-only { display: none !important; }
   line-height: 1.6;
 }
 
-/* Hours Card */
 .hours-card {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -1682,11 +1597,7 @@ html[lang="en"] .id-only { display: none !important; }
   display: block;
 }
 
-/* ==========================================================================
-   FOOTER
-   R-31: Deepest forest green (#162B22) grounding the page with persistent brand
-   tagline and verified navigation destinations.
-   ========================================================================== */
+/* Footer */
 .footer {
   background-color: #162B22;
   color: #F9F8F5;
@@ -1767,9 +1678,6 @@ html[lang="en"] .id-only { display: none !important; }
   gap: 12px;
 }
 
-/* ==========================================================================
-   SCROLL REVEAL UTILITIES (MOTION 2)
-   ========================================================================== */
 .reveal {
   opacity: 0;
   transform: translateY(20px);
@@ -1781,9 +1689,7 @@ html[lang="en"] .id-only { display: none !important; }
   transform: translateY(0);
 }
 
-/* ==========================================================================
-   RESPONSIVE MEDIA QUERIES (R-03: MOBILE FIRST COMPLIANCE)
-   ========================================================================== */
+/* Responsive Media Queries */
 @media (max-width: 1024px) {
   .menu-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -1804,9 +1710,6 @@ html[lang="en"] .id-only { display: none !important; }
   }
   .hamburger-btn {
     display: flex;
-  }
-  .mobile-nav-drawer {
-    display: block;
   }
   .menu-grid {
     grid-template-columns: 1fr;
@@ -1865,24 +1768,21 @@ html[lang="en"] .id-only { display: none !important; }
 </head>
 <body>
 
-  <!-- ==========================================================================
-       NAVBAR (STICKY FIXED TOP)
-       R-24: Every link points to an actual anchor or activates a real modal.
-       ========================================================================== -->
+  <!-- NAVBAR -->
   <header class="navbar" id="main-navbar">
     <div class="container nav-container">
       <a href="#hero" class="brand-logo" aria-label="KATARU Home">
         <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
-  <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
-  <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
-  <line x1="6" y1="1" x2="6" y2="4"></line>
-  <line x1="10" y1="1" x2="10" y2="4"></line>
-  <line x1="14" y1="1" x2="14" y2="4"></line>
-</svg>
+          <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+          <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
+          <line x1="6" y1="1" x2="6" y2="4"></line>
+          <line x1="10" y1="1" x2="10" y2="4"></line>
+          <line x1="14" y1="1" x2="14" y2="4"></line>
+        </svg>
         <span>KATARU</span>
       </a>
 
-      <!-- Desktop Navigation Links -->
+      <!-- Desktop Nav -->
       <nav aria-label="Primary Navigation">
         <ul class="nav-links-desktop">
           <li>
@@ -1918,7 +1818,7 @@ html[lang="en"] .id-only { display: none !important; }
         </ul>
       </nav>
 
-      <!-- Desktop Language Toggle & Reservation CTA -->
+      <!-- Desktop Actions -->
       <div class="nav-actions-desktop">
         <div class="lang-toggle" role="group" aria-label="Language Selector">
           <button type="button" class="lang-btn active" data-lang="en" aria-pressed="true">EN</button>
@@ -1986,11 +1886,7 @@ html[lang="en"] .id-only { display: none !important; }
   </header>
 
   <main>
-    <!-- ==========================================================================
-         HERO SECTION (#hero)
-         R-31: Immersive dark green Japanese aesthetic with verified Google rating.
-         R-02: Zero em dashes in headlines or copy.
-         ========================================================================== -->
+    <!-- HERO SECTION -->
     <section id="hero" class="hero-section">
       <div class="hero-grain" aria-hidden="true"></div>
       <div class="container">
@@ -1999,7 +1895,6 @@ html[lang="en"] .id-only { display: none !important; }
             <span class="en-only">⭐️ 5.0 Google Reviews • Late-Night Hangout Spot</span>
             <span class="id-only">⭐️ 5.0 Google Reviews • Tempat Nongkrong Hingga Larut Malam</span>
           </div>
-          <!-- IMMUTABLE TAGLINE: NEVER TRANSLATED -->
           <h1 class="hero-headline">Where Talks Brew and Stories Simmer</h1>
           <p class="hero-subhead">
             <span class="en-only">Tanjung Duren's coziest spot for specialty coffee, hearty Japanese fusion comfort dishes, and late-night talks.</span>
@@ -2020,16 +1915,12 @@ html[lang="en"] .id-only { display: none !important; }
       <div class="hero-scroll-indicator" aria-hidden="true">
         <span>Scroll</span>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-  <polyline points="6 9 12 15 18 9"></polyline>
-</svg>
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
       </div>
     </section>
 
-    <!-- ==========================================================================
-         STORY SECTION (#story)
-         R-31: Grounded brand narrative in warm cream (#F9F8F5) with the single
-         allowed glassmorphism card (R-10 compliance).
-         ========================================================================== -->
+    <!-- STORY SECTION -->
     <section id="story" class="story-section">
       <div class="container">
         <div class="story-grid">
@@ -2076,7 +1967,6 @@ html[lang="en"] .id-only { display: none !important; }
             </div>
           </div>
 
-          <!-- Glassmorphism Accent Card (R-10 compliance: only 1 glass card in UI) -->
           <div class="story-visual-col reveal">
             <div class="story-card-glass">
               <p class="story-card-tagline">"Where Talks Brew and Stories Simmer"</p>
@@ -2087,11 +1977,7 @@ html[lang="en"] .id-only { display: none !important; }
       </div>
     </section>
 
-    <!-- ==========================================================================
-         MENU SECTION (#menu)
-         R-31: High-utility white background with tabbed navigation, real-time
-         search filtering, size/variant pickers, and add-on customizers.
-         ========================================================================== -->
+    <!-- MENU SECTION -->
     <section id="menu" class="menu-section">
       <div class="container">
         <div class="menu-header reveal">
@@ -2109,7 +1995,6 @@ html[lang="en"] .id-only { display: none !important; }
           </p>
         </div>
 
-        <!-- Accessible Tabs (ARIA Tablist) -->
         <div class="menu-tabs-wrapper reveal">
           <div class="menu-tabs" role="tablist" aria-label="Menu Sections">
             <button type="button" class="menu-tab-btn" id="tab-bev" role="tab" aria-selected="true" aria-controls="panel-bev">
@@ -2123,13 +2008,12 @@ html[lang="en"] .id-only { display: none !important; }
           </div>
         </div>
 
-        <!-- Real-Time Search Bar -->
         <div class="menu-controls reveal">
           <div class="search-input-wrapper">
             <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
-  <circle cx="11" cy="11" r="8"></circle>
-  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-</svg>
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
             <input type="text" id="menu-search" class="menu-search-input" placeholder="Search coffee, matcha, rice bowls..." aria-label="Search menu items">
             <button type="button" id="clear-search-btn" class="clear-search-btn" aria-label="Clear search input">&times;</button>
           </div>
@@ -2142,12 +2026,11 @@ html[lang="en"] .id-only { display: none !important; }
           </div>
           <div class="menu-grid" id="bev-grid"></div>
 
-          <!-- Empty State for Beverages (R-27) -->
           <div class="menu-empty-state" id="bev-empty-state">
             <svg class="menu-empty-icon" viewBox="0 0 24 24" aria-hidden="true">
-  <circle cx="12" cy="12" r="10"></circle>
-  <line x1="8" y1="12" x2="16" y2="12"></line>
-</svg>
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="8" y1="12" x2="16" y2="12"></line>
+            </svg>
             <h3 class="menu-empty-title">
               <span class="en-only">No drinks found</span>
               <span class="id-only">Minuman tidak ditemukan</span>
@@ -2162,7 +2045,6 @@ html[lang="en"] .id-only { display: none !important; }
             </button>
           </div>
 
-          <!-- Add-ons Component -->
           <div class="addons-section reveal">
             <div class="addons-header">
               <h3 class="addons-title">
@@ -2185,12 +2067,11 @@ html[lang="en"] .id-only { display: none !important; }
           </div>
           <div class="menu-grid" id="dishes-grid"></div>
 
-          <!-- Empty State for Dishes (R-27) -->
           <div class="menu-empty-state" id="dish-empty-state">
             <svg class="menu-empty-icon" viewBox="0 0 24 24" aria-hidden="true">
-  <circle cx="12" cy="12" r="10"></circle>
-  <line x1="8" y1="12" x2="16" y2="12"></line>
-</svg>
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="8" y1="12" x2="16" y2="12"></line>
+            </svg>
             <h3 class="menu-empty-title">
               <span class="en-only">No dishes found</span>
               <span class="id-only">Hidangan tidak ditemukan</span>
@@ -2208,10 +2089,7 @@ html[lang="en"] .id-only { display: none !important; }
       </div>
     </section>
 
-    <!-- ==========================================================================
-         LOCATION & HOURS SECTION (#location)
-         R-31: Direct information architecture for evening visitors in Tanjung Duren.
-         ========================================================================== -->
+    <!-- LOCATION & HOURS -->
     <section id="location" class="location-section">
       <div class="container">
         <div class="location-grid">
@@ -2229,7 +2107,6 @@ html[lang="en"] .id-only { display: none !important; }
               Jl. Tanjung Duren Barat, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11470.
             </p>
 
-            <!-- Operating Hours Card -->
             <div class="hours-card">
               <div class="hours-title">
                 <span>🕒</span>
@@ -2252,30 +2129,28 @@ html[lang="en"] .id-only { display: none !important; }
               </div>
             </div>
 
-            <!-- Direct Contact Cards -->
             <div class="contact-links-grid">
               <a href="https://wa.me/62XXXXXXXXXX" class="contact-card" target="_blank" rel="noopener noreferrer">
                 <svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true">
-  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
-</svg>
+                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                </svg>
                 <span class="contact-card-label">WhatsApp</span>
               </a>
               <a href="https://instagram.com/kataru.id" class="contact-card" target="_blank" rel="noopener noreferrer">
                 <svg class="contact-card-icon" viewBox="0 0 24 24" aria-hidden="true">
-  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-</svg>
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
                 <span class="contact-card-label">Instagram</span>
               </a>
               <a href="https://maps.google.com/?q=Tanjung+Duren,+Jakarta+Barat" class="contact-card" target="_blank" rel="noopener noreferrer">
                 <svg class="contact-card-icon" viewBox="0 0 24 24" aria-hidden="true">
-  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-</svg>
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                </svg>
                 <span class="contact-card-label">Google Maps</span>
               </a>
             </div>
           </div>
 
-          <!-- Embedded Map -->
           <div class="location-map reveal">
             <div class="map-container">
               <iframe
@@ -2292,25 +2167,21 @@ html[lang="en"] .id-only { display: none !important; }
     </section>
   </main>
 
-  <!-- ==========================================================================
-       FOOTER
-       R-31: Deepest forest grounding with brand mark, address, and navigation.
-       ========================================================================== -->
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
       <div class="footer-top">
         <div class="footer-brand">
           <div class="footer-logo">
             <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
-  <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
-  <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
-  <line x1="6" y1="1" x2="6" y2="4"></line>
-  <line x1="10" y1="1" x2="10" y2="4"></line>
-  <line x1="14" y1="1" x2="14" y2="4"></line>
-</svg>
+              <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+              <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
+              <line x1="6" y1="1" x2="6" y2="4"></line>
+              <line x1="10" y1="1" x2="10" y2="4"></line>
+              <line x1="14" y1="1" x2="14" y2="4"></line>
+            </svg>
             <span>KATARU</span>
           </div>
-          <!-- IMMUTABLE TAGLINE: NEVER TRANSLATED -->
           <p class="footer-tagline">"Where Talks Brew and Stories Simmer"</p>
           <p class="footer-address">
             Tanjung Duren, Grogol Petamburan, Jakarta Barat, Daerah Khusus Ibukota Jakarta.
@@ -2373,16 +2244,14 @@ html[lang="en"] .id-only { display: none !important; }
     </div>
   </footer>
 
-  <!-- ==========================================================================
-       FLOATING CART BAR & SLIDE-UP DRAWER
-       ========================================================================== -->
+  <!-- FLOATING CART -->
   <div class="floating-cart-bar" id="floating-cart-bar" role="button" aria-label="Open Cart Order Drawer">
     <div class="cart-bar-badge">
       <svg class="cart-icon" viewBox="0 0 24 24" aria-hidden="true">
-  <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-  <line x1="3" y1="6" x2="21" y2="6"></line>
-  <path d="M16 10a4 4 0 0 1-8 0"></path>
-</svg>
+        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <path d="M16 10a4 4 0 0 1-8 0"></path>
+      </svg>
       <span class="cart-count-badge" id="cart-count-badge">0</span>
     </div>
     <div class="cart-bar-total" id="cart-bar-total">Rp 0</div>
@@ -2390,8 +2259,8 @@ html[lang="en"] .id-only { display: none !important; }
       <span class="en-only">View Order</span>
       <span class="id-only">Lihat Pesanan</span>
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-  <polyline points="9 18 15 12 9 6"></polyline>
-</svg>
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
     </div>
   </div>
 
@@ -2415,18 +2284,15 @@ html[lang="en"] .id-only { display: none !important; }
       </div>
       <button type="button" class="btn-whatsapp-order" id="btn-wa-order">
         <svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true">
-  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
-</svg>
+          <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+        </svg>
         <span class="en-only">Order via WhatsApp</span>
         <span class="id-only">Pesan via WhatsApp</span>
       </button>
     </div>
   </div>
 
-  <!-- ==========================================================================
-       RESERVATION MODAL
-       R-32: Focus trapped, Escape closes, real-time validation, WhatsApp export.
-       ========================================================================== -->
+  <!-- RESERVATION MODAL -->
   <div class="modal-overlay" id="reservation-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="res-modal-title">
     <div class="modal-dialog">
       <button type="button" class="modal-close-btn" id="modal-close-btn" aria-label="Close reservation dialog">&times;</button>
@@ -2510,8 +2376,8 @@ html[lang="en"] .id-only { display: none !important; }
 
         <button type="submit" class="btn-submit-reservation">
           <svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true">
-  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
-</svg>
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+          </svg>
           <span class="en-only">Send Reservation via WhatsApp</span>
           <span class="id-only">Kirim Reservasi via WhatsApp</span>
         </button>
@@ -2519,886 +2385,6 @@ html[lang="en"] .id-only { display: none !important; }
     </div>
   </div>
 
-  <!-- Embedded Structured Data & Application Logic -->
   <script>
     const BEVERAGES_DATA = [{"category": "Kataru Picks", "category_id": "kataru-picks", "category_id_name": "Pilihan Kataru", "items": [{"name": "Rose Cloud Latte", "r": 31, "l": 38, "badges": ["Recommended"], "desc_en": "Espresso poured over silky milk with delicate rose floral notes and velvety cloud foam.", "desc_id": "Espresso berpadu susu lembut dengan aroma mawar anggun dan busa awan yang creamy."}, {"name": "Banana Nuts", "r": 31, "l": 38, "badges": [], "desc_en": "Rich banana infusion balanced with nutty espresso undertones and cream.", "desc_id": "Paduan aroma pisang manis berpadu gurihnya kacang dan espresso kental."}, {"name": "Peanut Butter Coffee", "r": 31, "l": 38, "badges": ["Recommended"], "desc_en": "Creamy peanut butter blended with bold roast coffee and sweet condensed milk.", "desc_id": "Selai kacang gurih berpadu kopi pekat dan susu kental manis yang memanjakan lidah."}, {"name": "Coconut Coffee Cloud", "r": 31, "l": 38, "badges": [], "desc_en": "Tropical coconut water, espresso shot, and whipped coconut cream cloud.", "desc_id": "Kesegaran kelapa berpadu shot espresso dengan lapisan busa kelapa lembut di atasnya."}, {"name": "Butter Scotch", "r": 31, "l": 38, "badges": [], "desc_en": "Warm butterscotch caramel richness blended with fresh espresso and cold milk.", "desc_id": "Karamel butterscotch legit berpadu espresso segar dan susu dingin yang nikmat."}]}, {"category": "Classic Brews", "category_id": "classic-brews", "category_id_name": "Kopi Klasik", "items": [{"name": "Espresso", "r": 17, "l": 24, "badges": [], "desc_en": "Double shot of artisan roasted house beans with thick hazelnut crema.", "desc_id": "Ekstraksi ganda biji kopi pilihan dengan crema tebal berwarna hazelnut."}, {"name": "Americano", "r": 20, "l": 27, "badges": [], "desc_en": "Clean and bright double shot espresso lengthened with hot or iced mineral water.", "desc_id": "Espresso ganda yang segar dan bersih, disajikan panas atau dingin dengan air mineral."}, {"name": "Coffee Latte", "r": 27, "l": 34, "badges": [], "desc_en": "Silky steamed milk poured over rich espresso with delicate microfoam art.", "desc_id": "Susu segar kukus lembut dituangkan di atas espresso dengan seni latte yang cantik."}, {"name": "Cappuccino", "r": 27, "l": 34, "badges": [], "desc_en": "Equal parts espresso, warm milk, and dense foam dusted with fine cocoa.", "desc_id": "Keseimbangan seimbang espresso, susu hangat, dan busa tebal berhias bubuk kakao."}, {"name": "Magic", "r": 27, "l": 34, "badges": ["Recommended"], "desc_en": "Double ristretto with three-quarter flat white milk for intense coffee sweetness.", "desc_id": "Double ristretto dengan susu flat white 3/4 untuk rasa manis kopi yang intens."}]}, {"category": "Coffee Flavors", "category_id": "coffee-flavors", "category_id_name": "Varian Rasa Kopi", "items": [{"name": "Gula Aren", "r": 27, "l": 34, "badges": ["Recommended"], "desc_en": "Signature Indonesian organic palm sugar latte with smooth aromatic depth.", "desc_id": "Kopi susu gula aren organik khas nusantara dengan rasa manis legit dan harum."}, {"name": "Pandan", "r": 27, "l": 34, "badges": [], "desc_en": "Fragrant fragrant screwpine leaf syrup blended with rich latte.", "desc_id": "Sirup daun pandan wangi alami berpadu latte lembut yang menyegarkan."}, {"name": "Hazelnut", "r": 27, "l": 34, "badges": [], "desc_en": "Roasted hazelnut syrup with creamy espresso and textured milk.", "desc_id": "Kacang hazelnut panggang gurih berpadu espresso creamy dan susu lembut."}, {"name": "Caramel", "r": 27, "l": 34, "badges": [], "desc_en": "Slow-cooked butter caramel syrup infused into rich espresso latte.", "desc_id": "Karamel mentega manis gurih berpadu sempurna dalam espresso latte nikmat."}, {"name": "Vanilla", "r": 27, "l": 34, "badges": [], "desc_en": "Madagascar vanilla aroma infused with smooth espresso and cold fresh milk.", "desc_id": "Aroma vanila lembut berpadu espresso mantap dan susu segar dingin."}]}, {"category": "Ube Series", "category_id": "ube-series", "category_id_name": "Seri Ube", "items": [{"name": "Ube Brulee", "r": 32, "l": 39, "badges": ["NEW", "Recommended"], "desc_en": "Purple yam puree layered with torched caramelized custard crust and fresh milk.", "desc_id": "Puree ubi ungu lembut dengan lapisan custard brulee gosong yang wangi dan renyah."}, {"name": "Ube Matcha", "r": 32, "l": 39, "badges": ["NEW"], "desc_en": "Vibrant Japanese ceremonial matcha poured over rich velvety ube puree.", "desc_id": "Matcha seremonial Jepang berpadu kontras dengan kelembutan manis ubi ungu."}, {"name": "Ube Latte", "r": 32, "l": 39, "badges": ["NEW"], "desc_en": "Creamy artisanal purple yam milk blend with a comforting earthy sweetness.", "desc_id": "Paduan susu segar dan ubi ungu asli dengan rasa manis alami yang menenangkan."}, {"name": "Ube Sesame", "r": 32, "l": 39, "badges": ["NEW"], "desc_en": "Toasted black sesame cream layered over sweet purple yam and iced milk.", "desc_id": "Krim wijen hitam panggang gurih bertabur di atas lapisan ube manis dan susu."}]}, {"category": "Orange Series", "category_id": "orange-series", "category_id_name": "Seri Jeruk Segar", "items": [{"name": "Orange Gum", "r": 27, "l": 34, "badges": ["NEW"], "desc_en": "Playful citrus bubblegum soda with fresh orange juice and sparkling water.", "desc_id": "Soda jeruk segar dengan sentuhan rasa bubblegum yang ceria dan menyegarkan."}, {"name": "Orange Zest Latte", "r": 31, "l": 38, "badges": ["NEW", "Recommended"], "desc_en": "Fresh grated orange zest and citrus syrup balanced with bold espresso and steamed milk.", "desc_id": "Parutan kulit jeruk segar dan sirup sitrus berpadu espresso mantap dan susu hangat."}, {"name": "Mont Blanc", "r": 27, "l": 34, "badges": ["NEW"], "desc_en": "Citrus cold brew topped with whipped vanilla cream mountain and orange peel.", "desc_id": "Cold brew citrus dingin dengan mahkota krim vanila lembut dan kulit jeruk manis."}]}, {"category": "Matcha Mood", "category_id": "matcha-mood", "category_id_name": "Suasana Matcha", "items": [{"name": "Coconut Matcha", "r": 32, "l": 39, "badges": ["Recommended"], "desc_en": "Refreshing pure coconut water topped with whisked Uji green tea foam.", "desc_id": "Kesegaran air kelapa murni dipadu kocokan busa matcha Uji Jepang yang pekat."}, {"name": "Matcha Rose", "r": 32, "l": 39, "badges": [], "desc_en": "Floral French rose syrup layered with ceremonial matcha and creamy oat milk.", "desc_id": "Aroma mawar Prancis berpadu matcha seremonial dan susu oat yang lembut."}, {"name": "Matcha Latte", "r": 31, "l": 38, "badges": ["Recommended"], "desc_en": "Stone-ground Japanese green tea whisked with rich whole milk and light cane sugar.", "desc_id": "Bubuk teh hijau Jepang gilingan batu berpadu susu murni dan gula tebu alami."}]}, {"category": "Zero Coffee", "category_id": "zero-coffee", "category_id_name": "Tanpa Kopi", "items": [{"name": "Black Sesame", "r": 32, "l": 39, "badges": ["Recommended"], "desc_en": "Slow-roasted Japanese kurogoma black sesame paste with warm or iced milk.", "desc_id": "Pasta wijen hitam kurogoma Jepang panggang dengan susu creamy yang harum."}, {"name": "Choco Banana", "r": 32, "l": 39, "badges": [], "desc_en": "Decadent Dutch cocoa blended with ripe banana puree and cold dairy.", "desc_id": "Cokelat pekat Belanda berpadu puree pisang manis dan susu dingin segar."}, {"name": "Dark Chocolate", "r": 29, "l": 36, "badges": [], "desc_en": "70 percent artisan dark cocoa melted into velvety steamed milk.", "desc_id": "Kakao hitam 70 persen murni yang meleleh dalam susu kukus lembut."}]}, {"category": "Fresh Sips", "category_id": "fresh-sips", "category_id_name": "Minuman Segar", "items": [{"name": "Mojito Peach", "r": 29, "l": 36, "badges": [], "desc_en": "Muddled fresh mint leaves, white peach syrup, lime wedge, and bubbly soda.", "desc_id": "Daun mint segar ditumbuk bersama sirup persik, perasan jeruk nipis, dan soda berbuih."}, {"name": "Mojito Peach Coffee", "r": 34, "l": 41, "badges": ["Recommended"], "desc_en": "Crisp sparkling peach mint mocktail topped with a bold floating espresso shot.", "desc_id": "Mocktail persik mint segar berbuih dengan topping espresso shot yang melayang."}, {"name": "Berry Berry Good Coffee", "r": 34, "l": 41, "badges": [], "desc_en": "Muddled wild berries, sparkling tonic, and double shot espresso.", "desc_id": "Buah beri liar segar, sparkling tonic menyegarkan, dan double shot espresso."}, {"name": "Berry Berry Good", "r": 29, "l": 36, "badges": [], "desc_en": "Vibrant strawberry, blueberry, and raspberry crushed with sparkling soda.", "desc_id": "Perpaduan stroberi, bluberi, dan rasberi segar berpadu soda dingin menyegarkan."}]}, {"category": "Tea Talks", "category_id": "tea-talks", "category_id_name": "Cerita Teh", "items": [{"name": "Dear Jasmine", "r": 27, "l": 34, "badges": [], "desc_en": "Handpicked high mountain green tea infused with night-blooming jasmine flowers.", "desc_id": "Seduhan teh hijau pegunungan dengan wangi bunga melati yang mekar di malam hari."}, {"name": "Darling Rose", "r": 27, "l": 34, "badges": [], "desc_en": "Fragrant crimson rose petal herbal infusion with a touch of wildflower honey.", "desc_id": "Infusi kelopak mawar merah wangi dengan sentuhan manis madu bunga liar."}, {"name": "Lychee Tea", "r": 29, "l": 36, "badges": ["Recommended"], "desc_en": "Premium black tea infused with sweet lychee juice and whole peeled lychees.", "desc_id": "Teh hitam premium berpadu sirup leci manis dan buah leci utuh pilihan."}, {"name": "Sweet Tea", "r": 19, "l": 24, "badges": [], "desc_en": "Traditional Indonesian jasmine iced tea brewed fresh with cane sugar.", "desc_id": "Teh manis melati tradisional Indonesia yang diseduh segar setiap hari."}]}];
-    const DISHES_DATA = [{"category": "Pasta Stories", "category_id": "pasta-stories", "category_id_name": "Kisah Pasta", "items": [{"name": "Chili Oil", "price": 35, "badges": ["Recommended"], "desc_en": "Al dente spaghetti tossed in homemade aromatic chili oil, garlic crunch, and scallions.", "desc_id": "Spaghetti al dente berbalut chili oil gurih buatan sendiri, bawang putih renyah, dan daun bawang."}, {"name": "Peanut Butter", "price": 39, "badges": [], "desc_en": "Japanese fusion noodles in savory peanut sesame sauce with chili crisp and minced chicken.", "desc_id": "Pasta fusion dengan saus kacang wijen gurih gurih, chili crisp, dan potongan ayam lembut."}, {"name": "Carbonara", "price": 39, "badges": ["Recommended"], "desc_en": "Classic creamy pasta with smoked beef bacon, egg yolk, and parmesan cheese.", "desc_id": "Pasta saus krim kental dengan smoked beef renyah, kuning telur, dan keju parmesan melimpah."}, {"name": "Bolognese", "price": 39, "badges": [], "desc_en": "Slow-simmered Australian minced beef in ripe tomato herb sauce over spaghetti.", "desc_id": "Daging sapi cincang Australia yang dimasak perlahan dengan saus tomat rempah kaya rasa."}]}, {"category": "Rice Bowls", "category_id": "rice-bowls", "category_id_name": "Mangkok Nasi", "items": [{"name": "Mozaru Rice", "variants": [{"label": "Hamburg", "price": 42}, {"label": "Chicken", "price": 49}], "badges": ["Recommended"], "desc_en": "Baked Japanese butter rice smothered in savory sauce and thick melted mozzarella cheese.", "desc_id": "Nasi mentega panggang khas Jepang diselimuti saus lezat dan keju mozzarella lumer melimpah."}, {"name": "Curry Rice", "variants": [{"label": "Chicken", "price": 39}, {"label": "Beef", "price": 45}], "badges": ["Recommended"], "desc_en": "Thick golden Japanese curry with slow-cooked carrots and potatoes over steamed rice.", "desc_id": "Kari Jepang kental gurih dengan wortel dan kentang empuk di atas nasi pulen hangat."}, {"name": "Teriyaki Donburi", "variants": [{"label": "Chicken", "price": 35}, {"label": "Beef", "price": 42}, {"label": "Salmon", "price": 49}], "badges": [], "desc_en": "Glazed meat of choice grilled with sweet soy mirin reduction on warm Japanese rice.", "desc_id": "Pilihan daging panggang berbalut saus teriyaki manis gurih di atas nasi hangat."}, {"name": "Salted Egg Donburi Chicken", "price": 39, "badges": [], "desc_en": "Crispy chicken popcorn drenched in creamy golden salted egg yolk sauce with curry leaves.", "desc_id": "Ayam krispi gurih disiram saus telur asin keemasan yang creamy dengan wangi daun kari."}, {"name": "Mentai Donburi Chicken", "price": 35, "badges": [], "desc_en": "Tender chicken cutlet smothered in torched spicy cod roe mayo over warm rice.", "desc_id": "Potongan ayam lembut diselimuti saus mentai gurih pedas yang dibakar aromatik."}, {"name": "Black Pepper Donburi Beef", "price": 42, "badges": [], "desc_en": "Sliced tender beef stir-fried with cracked black peppercorns, onions, and bell peppers.", "desc_id": "Irisan daging sapi empuk ditumis dengan lada hitam tumbuk kasar, bawang bombay, dan paprika."}, {"name": "Nanban Donburi Chicken", "price": 35, "badges": ["NEW", "Recommended"], "desc_en": "Crispy chicken soaked in sweet sour nanban vinegar topped with egg tartare sauce.", "desc_id": "Ayam goreng renyah berbalut cuka nanban manis asam disajikan dengan saus tartar telur segar."}, {"name": "Katsudon Chicken", "price": 37, "badges": ["NEW", "Recommended"], "desc_en": "Crispy breaded chicken cutlet simmered in dashi broth with beaten eggs and sweet onions.", "desc_id": "Katsu ayam renyah yang dimasak dalam kuah dashi gurih bersama telur kocok dan bawang bombay."}]}, {"category": "Yaki Dishes", "category_id": "yaki-dishes", "category_id_name": "Hidangan Panggang", "items": [{"name": "Yaki Meshi", "price": 26, "badges": [], "desc_en": "Japanese style wok-fried rice with egg, scallions, garlic, and savory dashi butter.", "desc_id": "Nasi goreng ala Jepang yang dimasak dengan api besar, telur, daun bawang, dan mentega dashi."}, {"name": "Yaki Soba", "price": 26, "badges": [], "desc_en": "Stir-fried wheat noodles with crisp cabbage, bean sprouts, and tangy Worcestershire soba sauce.", "desc_id": "Mi goreng gandum dengan kol renyah, tauge segar, dan saus soba gurih manis khas kedai malam."}, {"name": "Yakimeshi Curry", "price": 29, "badges": ["NEW", "Recommended"], "desc_en": "Wok-tossed fried rice infused with rich Japanese curry spices, minced meat, and eggs.", "desc_id": "Nasi goreng wajan bertabur bumbu kari Jepang harum dengan daging cincang dan telur gurih."}, {"name": "Yakimeshi Mentai", "price": 26, "badges": ["NEW"], "desc_en": "Savory fried rice crowned with torched creamy spicy mentai roe sauce.", "desc_id": "Nasi goreng gurih dengan topping saus mentai creamy yang di-torch wangi semerbak."}]}, {"category": "Yakitori (2pcs)", "category_id": "yakitori", "category_id_name": "Sate Jepang (2 tusuk)", "items": [{"name": "Tori Kawa", "price": 15, "badges": [], "desc_en": "Skewered chicken skin grilled until crackling crisp with tare glaze or sea salt.", "desc_id": "Kulit ayam renyah gurih dipanggang arang dengan olesan saus tare atau garam laut."}, {"name": "Negima", "price": 19, "badges": ["Recommended"], "desc_en": "Juicy chicken thigh chunks alternated with sweet charred Tokyo negi scallions.", "desc_id": "Paha ayam juicy berselang-seling dengan daun bawang Tokyo bakar yang manis."}, {"name": "Tsukune", "price": 24, "badges": [], "desc_en": "Handcrafted minced chicken meatballs seasoned with ginger, shiso, and tare glaze.", "desc_id": "Bola-bola daging ayam giling buatan tangan berbumbu jahe dan saus manis gurih."}, {"name": "Gyu Enoki", "price": 24, "badges": [], "desc_en": "Tender thinly-sliced beef wrapped around fresh crunchy enoki mushrooms.", "desc_id": "Irisan tipis daging sapi empuk membalut jamur enoki renyah berlumur saus panggang."}]}, {"category": "Small Bites", "category_id": "small-bites", "category_id_name": "Camilan", "items": [{"name": "Chicken Wings", "price": 29, "badges": [], "desc_en": "Crispy double-fried chicken wings glazed with savory garlic sweet sauce.", "desc_id": "Sayap ayam goreng renyah berbalut saus bawang manis gurih yang menggoda."}, {"name": "Chicken Karaage", "price": 24, "badges": ["Recommended"], "desc_en": "Bite-sized ginger garlic marinated chicken thighs fried crispy with Japanese kewpie mayo.", "desc_id": "Potongan paha ayam marinasi jahe bawang yang digoreng renyah dengan cocolan mayo kewpie."}, {"name": "Croquette", "variants": [{"label": "Beef", "price": 19}, {"label": "Salmon", "price": 24}], "badges": [], "desc_en": "Golden panko-crusted potato patty filled with savory minced beef or salmon.", "desc_id": "Kroket kentang lembut berlapis tepung roti keemasan berisi cincangan daging sapi atau salmon."}, {"name": "Mix Platter", "price": 55, "badges": ["Recommended"], "desc_en": "Sharing platter with crispy wings, chicken karaage, fries, and dipping sauces.", "desc_id": "Piring komplit untuk dinikmati bersama berisi sayap ayam, karaage, kentang goreng, dan aneka saus."}, {"name": "French Fries", "variants": [{"label": "Original", "price": 19}, {"label": "BBQ", "price": 21}, {"label": "Cheese", "price": 21}, {"label": "Seaweed", "price": 21}], "badges": ["NEW"], "desc_en": "Crispy golden straight-cut potato fries tossed in your favorite flavor seasoning.", "desc_id": "Kentang goreng renyah gurih bertabur bumbu pilihan favoritmu."}, {"name": "Ube Fries", "variants": [{"label": "Original", "price": 19}, {"label": "BBQ", "price": 21}, {"label": "Cheese", "price": 21}, {"label": "Seaweed", "price": 21}], "badges": ["NEW", "Recommended"], "desc_en": "Sweet purple yam fries fried until golden crisp on the outside, fluffy inside.", "desc_id": "Kentang ubi ungu manis alami yang digoreng garing di luar dan lembut di dalam."}, {"name": "Nachos", "price": 23, "badges": ["NEW"], "desc_en": "Crisp corn tortilla chips with warm melted cheese drizzle and house salsa.", "desc_id": "Keripik tortilla renyah dengan siraman saus keju hangat dan salsa segar."}]}, {"category": "Misoa Dishes", "category_id": "misoa-dishes", "category_id_name": "Hidangan Misoa", "items": [{"name": "Misoa Original", "price": 26, "badges": ["NEW"], "desc_en": "Silky thin wheat misoa noodles in rich clear chicken broth with soft egg and greens.", "desc_id": "Mi misoa lembut dalam kuah kaldu ayam bening yang kaya rasa dengan telur dan sayuran."}, {"name": "Misoa Spicy", "price": 29, "badges": ["NEW", "Recommended"], "desc_en": "Silky wheat misoa in aromatic spicy broth with chili oil, garlic, and poached egg.", "desc_id": "Mi misoa sutra dalam kuah pedas gurih dengan chili oil wangi, bawang putih, dan telur setengah matang."}]}, {"category": "Sushi & Sashimi", "category_id": "sushi-sashimi", "category_id_name": "Sushi & Sashimi", "items": [{"name": "Chicken Spicy Roll 4pcs", "price": 19, "badges": [], "desc_en": "Crispy chicken and cucumber roll topped with spicy chili mayo drizzle.", "desc_id": "Gulungan sushi ayam krispi dan timun segar dengan saus pedas gurih."}, {"name": "Salmon Mentai Roll 4pcs", "price": 35, "badges": [], "desc_en": "Fresh salmon sushi roll blanketed with torched spicy mentaiko cream sauce.", "desc_id": "Sushi roll salmon segar diselimuti saus mentai bakar yang harum gurih."}, {"name": "Salmon Bomb 2pcs", "price": 24, "badges": [], "desc_en": "Gunkan sushi packed with diced fresh salmon, tobiko roe, and spicy mayo.", "desc_id": "Sushi gunkan berlimpah potongan salmon segar, telur ikan tobiko, dan spicy mayo."}, {"name": "Salmon Sashimi 5pcs", "price": 39, "badges": [], "desc_en": "Thick premium cuts of fresh Norwegian salmon served with wasabi and shoyu.", "desc_id": "Potongan tebal salmon segar kualitas prima disajikan dengan wasabi dan shoyu."}, {"name": "California Roll 4pcs", "price": 19, "badges": ["NEW"], "desc_en": "Classic crab stick, fresh avocado, and cucumber rolled inside out with orange tobiko.", "desc_id": "Sushi klasik berisi kani, alpukat, dan timun berbalut telur ikan tobiko oranye."}, {"name": "Nigiri Tamago 4pcs", "price": 12, "badges": [], "desc_en": "Sweet rolled Japanese dashi egg omelette resting over seasoned sushi rice.", "desc_id": "Telur dadar manis khas Jepang di atas kepalan nasi sushi berpati cuka."}, {"name": "Tuna Mayo Roll 4pcs", "price": 24, "badges": [], "desc_en": "Savory cooked tuna tossed in Japanese mayonnaise wrapped with seaweed and rice.", "desc_id": "Ikan tuna gurih berbumbu mayones Jepang dalam gulungan nori dan nasi pulen."}, {"name": "Chicken Curry Sushi 4pcs", "price": 24, "badges": ["NEW"], "desc_en": "Fried chicken roll topped with aromatic Japanese curry sauce and sesame seeds.", "desc_id": "Sushi ayam renyah dengan topping saus kari Jepang hangat dan taburan wijen."}, {"name": "Sushi Platter 12pcs", "price": 59, "badges": [], "desc_en": "Assorted chef selection of popular sushi rolls and nigiri for sharing.", "desc_id": "Aneka pilihan sushi favorit racikan chef untuk dinikmati bersama teman nongkrong."}]}, {"category": "Sweet Treats", "category_id": "sweet-treats", "category_id_name": "Manisan & Tambahan", "items": [{"name": "Matcha Panna Cotta", "price": 19, "badges": ["NEW"], "desc_en": "Silky Italian cream pudding infused with rich Uji matcha and sweet red bean.", "desc_id": "Panna cotta lembut dingin dengan teh hijau matcha Uji dan topping kacang merah manis."}, {"name": "Coffee Panna Cotta", "price": 16, "badges": [], "desc_en": "Velvety cream pudding flavored with house espresso and dark caramel glaze.", "desc_id": "Puding krim lembut beraroma espresso khas Kataru dengan siraman saus karamel lezat."}, {"name": "White Rice", "price": 10, "badges": [], "desc_en": "Steamed fluffy premium Japanese short-grain rice.", "desc_id": "Seporsi nasi putih pulen hangat berkualitas prima."}, {"name": "Egg", "price": 10, "badges": [], "desc_en": "Extra fresh egg prepared sunny side up or soft boiled.", "desc_id": "Tambahan telur segar pilihan (ceplok atau setengah matang)."}]}];
-    const ADDONS_DATA = [{"name": "Oat Milk", "name_id": "Susu Oat", "price": 10}, {"name": "Any Foam", "name_id": "Ekstra Foam", "price": 9}, {"name": "Any Syrup", "name_id": "Sirup Pilihan", "price": 7}, {"name": "Taru's Beans", "name_id": "Biji Kopi Taru", "price": 10}, {"name": "Kara's Beans", "name_id": "Biji Kopi Kara", "price": 7}];
-
-
-/* ==========================================================================
-   KATARU INTERACTIVE JAVASCRIPT APPLICATION
-   ========================================================================== */
-
-// WhatsApp destination number (R-38: clear placeholder comment)
-const WA_NUM = '62XXXXXXXXXX'; // TODO: replace with real number
-
-// Application state
-const state = {
-  lang: 'en',
-  currentTab: 'beverages',
-  currentBevCat: 'all',
-  currentDishCat: 'all',
-  searchQuery: '',
-  cart: [] // items: { id, name, variant, price, qty }
-};
-
-/* 
-   R-31 WRITTEN REASON FOR LANGUAGE SWITCHING:
-   Instant CSS-driven switching via html[lang] attribute prevents layout flash
-   and respects user preference persisted in localStorage.
-*/
-function setLanguage(lang) {
-  state.lang = lang;
-  document.documentElement.lang = lang;
-  try {
-    localStorage.setItem('kataru-lang', lang);
-  } catch (e) {
-    // LocalStorage fallback for private browsing
-  }
-
-  // Update language toggle buttons
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    const isCurrent = btn.dataset.lang === lang;
-    btn.classList.toggle('active', isCurrent);
-    btn.setAttribute('aria-pressed', isCurrent ? 'true' : 'false');
-  });
-
-  // Update dynamic placeholders
-  updatePlaceholders();
-
-  // Re-render menu cards to update language-sensitive badges and descriptions
-  renderBeverages();
-  renderDishes();
-  renderAddons();
-  filterMenu();
-  updateCartUI();
-}
-
-function updatePlaceholders() {
-  const isEn = state.lang === 'en';
-  
-  // Search input
-  const searchInput = document.getElementById('menu-search');
-  if (searchInput) {
-    searchInput.placeholder = isEn 
-      ? 'Search coffee, matcha, rice bowls...' 
-      : 'Cari kopi, matcha, rice bowl...';
-  }
-
-  // Reservation form placeholders
-  const nameInput = document.getElementById('res-name');
-  if (nameInput) {
-    nameInput.placeholder = isEn ? 'e.g. Alex Pratama' : 'cth. Alex Pratama';
-  }
-
-  const phoneInput = document.getElementById('res-phone');
-  if (phoneInput) {
-    phoneInput.placeholder = isEn ? 'e.g. 081234567890' : 'cth. 081234567890';
-  }
-
-  const guestsInput = document.getElementById('res-guests');
-  if (guestsInput) {
-    guestsInput.placeholder = isEn ? 'Number of guests (1-30)' : 'Jumlah tamu (1-30)';
-  }
-
-  const notesInput = document.getElementById('res-notes');
-  if (notesInput) {
-    notesInput.placeholder = isEn 
-      ? 'Any seating preferences or dietary notes?' 
-      : 'Pilihan posisi duduk atau catatan khusus lainnya?';
-  }
-}
-
-/* 
-   R-31 WRITTEN REASON FOR NAVBAR SCROLL BEHAVIOR:
-   Navbar transitions from transparent over dark hero to solid cream with
-   subtle shadow as user scrolls down, preserving readability across sections.
-*/
-function initNavbar() {
-  const navbar = document.getElementById('main-navbar');
-  const heroSection = document.getElementById('hero');
-
-  function handleScroll() {
-    if (window.scrollY > 50) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
-    }
-  }
-
-  window.addEventListener('scroll', handleScroll, { passive: true });
-  handleScroll();
-}
-
-/* Mobile Hamburger Menu */
-function toggleMobileMenu(forceClose = false) {
-  const drawer = document.getElementById('mobile-drawer');
-  const btn = document.getElementById('hamburger-btn');
-  const isOpen = forceClose ? false : !drawer.classList.contains('open');
-
-  drawer.classList.toggle('open', isOpen);
-  btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-  btn.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
-}
-
-/* 
-   R-31 WRITTEN REASON FOR ARIA TABLIST:
-   Allows seamless keyboard navigation (arrows/enter) and distinct browsing
-   focus between Beverages and Hearty Dishes.
-*/
-function initMenuTabs() {
-  const tabBev = document.getElementById('tab-bev');
-  const tabDishes = document.getElementById('tab-dishes');
-  const panelBev = document.getElementById('panel-bev');
-  const panelDishes = document.getElementById('panel-dishes');
-
-  function switchTab(target) {
-    state.currentTab = target;
-    const isBev = target === 'beverages';
-
-    tabBev.setAttribute('aria-selected', isBev ? 'true' : 'false');
-    tabDishes.setAttribute('aria-selected', isBev ? 'false' : 'true');
-
-    panelBev.style.display = isBev ? 'block' : 'none';
-    panelDishes.style.display = isBev ? 'none' : 'block';
-
-    filterMenu();
-  }
-
-  tabBev.addEventListener('click', () => switchTab('beverages'));
-  tabDishes.addEventListener('click', () => switchTab('dishes'));
-}
-
-/* Category Filter Chips */
-function renderChips() {
-  const bevChipsList = document.getElementById('bev-chips-list');
-  const dishChipsList = document.getElementById('dish-chips-list');
-
-  // Beverage Chips
-  const bevCategories = [
-    { id: 'all', en: 'All Drinks', id_name: 'Semua Minuman' },
-    ...BEVERAGES_DATA.map(cat => ({ id: cat.category_id, en: cat.category, id_name: cat.category_id_name }))
-  ];
-
-  bevChipsList.innerHTML = bevCategories.map(cat => `
-    <button type="button" class="filter-chip ${cat.id === state.currentBevCat ? 'active' : ''}" data-cat="${cat.id}">
-      <span class="en-only">${cat.en}</span>
-      <span class="id-only">${cat.id_name}</span>
-    </button>
-  `).join('');
-
-  bevChipsList.querySelectorAll('.filter-chip').forEach(btn => {
-    btn.addEventListener('click', () => {
-      bevChipsList.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-      btn.classList.add('active');
-      state.currentBevCat = btn.dataset.cat;
-      filterMenu();
-    });
-  });
-
-  // Dish Chips
-  const dishCategories = [
-    { id: 'all', en: 'All Dishes', id_name: 'Semua Makanan' },
-    ...DISHES_DATA.map(cat => ({ id: cat.category_id, en: cat.category, id_name: cat.category_id_name }))
-  ];
-
-  dishChipsList.innerHTML = dishCategories.map(cat => `
-    <button type="button" class="filter-chip ${cat.id === state.currentDishCat ? 'active' : ''}" data-cat="${cat.id}">
-      <span class="en-only">${cat.en}</span>
-      <span class="id-only">${cat.id_name}</span>
-    </button>
-  `).join('');
-
-  dishChipsList.querySelectorAll('.filter-chip').forEach(btn => {
-    btn.addEventListener('click', () => {
-      dishChipsList.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-      btn.classList.add('active');
-      state.currentDishCat = btn.dataset.cat;
-      filterMenu();
-    });
-  });
-}
-
-/* Format Rupiah currency cleanly */
-function formatRupiah(amountInThousands) {
-  return 'Rp ' + (amountInThousands * 1000).toLocaleString('id-ID');
-}
-
-/* 
-   R-31 WRITTEN REASON FOR DYNAMIC CARD RENDERING:
-   Renders menu cards with embedded variant and size pickers so users can
-   toggle between Regular/Large or flavor variants with real-time price updates.
-*/
-function renderBeverages() {
-  const container = document.getElementById('bev-grid');
-  let html = '';
-
-  BEVERAGES_DATA.forEach(cat => {
-    cat.items.forEach(item => {
-      const badgesHtml = item.badges.map(b => {
-        const cls = b === 'NEW' ? 'badge-new' : 'badge-rec';
-        return `<span class="badge ${cls}">${b}</span>`;
-      }).join('');
-
-      html += `
-        <article class="menu-card bev-card" data-category="${cat.category_id}" data-name="${item.name.toLowerCase()}">
-          <div class="menu-card-header">
-            <div class="menu-card-top">
-              <span class="menu-card-cat">
-                <span class="en-only">${cat.category}</span>
-                <span class="id-only">${cat.category_id_name}</span>
-              </span>
-              <div class="menu-card-badges">${badgesHtml}</div>
-            </div>
-            <h3 class="menu-card-title">${item.name}</h3>
-            <p class="menu-card-desc">
-              <span class="en-only">${item.desc_en}</span>
-              <span class="id-only">${item.desc_id}</span>
-            </p>
-          </div>
-
-          <div class="variant-selector-wrapper">
-            <span class="variant-label">
-              <span class="en-only">Size:</span>
-              <span class="id-only">Ukuran:</span>
-            </span>
-            <div class="variant-options">
-              <button type="button" class="variant-option-btn selected" data-size="Regular" data-price="${item.r}">
-                Regular (${item.r}k)
-              </button>
-              <button type="button" class="variant-option-btn" data-size="Large" data-price="${item.l}">
-                Large (${item.l}k)
-              </button>
-            </div>
-          </div>
-
-          <div class="menu-card-footer">
-            <div class="menu-price" data-base="${item.r}">${formatRupiah(item.r)}</div>
-            <button type="button" class="btn-add-item" data-item-name="${item.name}">
-              <span>+</span>
-              <span class="en-only">Add</span>
-              <span class="id-only">Tambah</span>
-            </button>
-          </div>
-        </article>
-      `;
-    });
-  });
-
-  container.innerHTML = html;
-
-  // Attach card event listeners for size toggling and cart addition
-  container.querySelectorAll('.menu-card').forEach(card => {
-    const sizeBtns = card.querySelectorAll('.variant-option-btn');
-    const priceDisplay = card.querySelector('.menu-price');
-    const addBtn = card.querySelector('.btn-add-item');
-
-    sizeBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        sizeBtns.forEach(b => b.classList.remove('selected'));
-        btn.classList.add('selected');
-        const price = parseInt(btn.dataset.price, 10);
-        priceDisplay.textContent = formatRupiah(price);
-      });
-    });
-
-    addBtn.addEventListener('click', () => {
-      const selectedSizeBtn = card.querySelector('.variant-option-btn.selected');
-      const size = selectedSizeBtn ? selectedSizeBtn.dataset.size : 'Regular';
-      const price = selectedSizeBtn ? parseInt(selectedSizeBtn.dataset.price, 10) : parseInt(priceDisplay.dataset.base, 10);
-      const name = addBtn.dataset.itemName;
-
-      addToCart({
-        id: `${name}_${size}`,
-        name: name,
-        variant: size,
-        price: price,
-        qty: 1
-      });
-    });
-  });
-}
-
-function renderDishes() {
-  const container = document.getElementById('dishes-grid');
-  let html = '';
-
-  DISHES_DATA.forEach(cat => {
-    cat.items.forEach(item => {
-      const badgesHtml = (item.badges || []).map(b => {
-        const cls = b === 'NEW' ? 'badge-new' : 'badge-rec';
-        return `<span class="badge ${cls}">${b}</span>`;
-      }).join('');
-
-      const hasVariants = item.variants && item.variants.length > 0;
-      const initialPrice = hasVariants ? item.variants[0].price : item.price;
-
-      let variantSelectorHtml = '';
-      if (hasVariants) {
-        const variantButtons = item.variants.map((v, idx) => `
-          <button type="button" class="variant-option-btn ${idx === 0 ? 'selected' : ''}" data-variant="${v.label}" data-price="${v.price}">
-            ${v.label} (${v.price}k)
-          </button>
-        `).join('');
-
-        variantSelectorHtml = `
-          <div class="variant-selector-wrapper">
-            <span class="variant-label">
-              <span class="en-only">Choice:</span>
-              <span class="id-only">Pilihan:</span>
-            </span>
-            <div class="variant-options">${variantButtons}</div>
-          </div>
-        `;
-      }
-
-      html += `
-        <article class="menu-card dish-card" data-category="${cat.category_id}" data-name="${item.name.toLowerCase()}">
-          <div class="menu-card-header">
-            <div class="menu-card-top">
-              <span class="menu-card-cat">
-                <span class="en-only">${cat.category}</span>
-                <span class="id-only">${cat.category_id_name}</span>
-              </span>
-              <div class="menu-card-badges">${badgesHtml}</div>
-            </div>
-            <h3 class="menu-card-title">${item.name}</h3>
-            <p class="menu-card-desc">
-              <span class="en-only">${item.desc_en}</span>
-              <span class="id-only">${item.desc_id}</span>
-            </p>
-          </div>
-
-          ${variantSelectorHtml}
-
-          <div class="menu-card-footer">
-            <div class="menu-price" data-base="${initialPrice}">${formatRupiah(initialPrice)}</div>
-            <button type="button" class="btn-add-item" data-item-name="${item.name}">
-              <span>+</span>
-              <span class="en-only">Add</span>
-              <span class="id-only">Tambah</span>
-            </button>
-          </div>
-        </article>
-      `;
-    });
-  });
-
-  container.innerHTML = html;
-
-  // Attach card event listeners for variant toggling and cart addition
-  container.querySelectorAll('.menu-card').forEach(card => {
-    const variantBtns = card.querySelectorAll('.variant-option-btn');
-    const priceDisplay = card.querySelector('.menu-price');
-    const addBtn = card.querySelector('.btn-add-item');
-
-    if (variantBtns.length > 0) {
-      variantBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          variantBtns.forEach(b => b.classList.remove('selected'));
-          btn.classList.add('selected');
-          const price = parseInt(btn.dataset.price, 10);
-          priceDisplay.textContent = formatRupiah(price);
-        });
-      });
-    }
-
-    addBtn.addEventListener('click', () => {
-      const selectedVariantBtn = card.querySelector('.variant-option-btn.selected');
-      const variant = selectedVariantBtn ? selectedVariantBtn.dataset.variant : '';
-      const price = selectedVariantBtn ? parseInt(selectedVariantBtn.dataset.price, 10) : parseInt(priceDisplay.dataset.base, 10);
-      const name = addBtn.dataset.itemName;
-
-      addToCart({
-        id: variant ? `${name}_${variant}` : name,
-        name: name,
-        variant: variant,
-        price: price,
-        qty: 1
-      });
-    });
-  });
-}
-
-function renderAddons() {
-  const container = document.getElementById('addons-grid');
-  if (!container) return;
-
-  container.innerHTML = ADDONS_DATA.map(addon => `
-    <div class="addon-card">
-      <div class="addon-info">
-        <span class="addon-name">
-          <span class="en-only">${addon.name}</span>
-          <span class="id-only">${addon.name_id}</span>
-        </span>
-        <span class="addon-price">+${formatRupiah(addon.price)}</span>
-      </div>
-      <button type="button" class="btn-add-addon" data-addon-name="${addon.name}" data-addon-price="${addon.price}" aria-label="Add ${addon.name}">
-        +
-      </button>
-    </div>
-  `).join('');
-
-  container.querySelectorAll('.btn-add-addon').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const name = btn.dataset.addonName;
-      const price = parseInt(btn.dataset.addonPrice, 10);
-      addToCart({
-        id: `Addon_${name}`,
-        name: `Add-on: ${name}`,
-        variant: '',
-        price: price,
-        qty: 1
-      });
-    });
-  });
-}
-
-/* 
-   R-31 REAL-TIME SEARCH & FILTER:
-   Filters cards instantly on input keystroke within active tab.
-   Triggers R-27 empty state if zero matches are found.
-*/
-function filterMenu() {
-  const isBev = state.currentTab === 'beverages';
-  const query = state.searchQuery.toLowerCase().trim();
-  const activeCat = isBev ? state.currentBevCat : state.currentDishCat;
-  const cards = document.querySelectorAll(isBev ? '.bev-card' : '.dish-card');
-  const emptyState = document.getElementById(isBev ? 'bev-empty-state' : 'dish-empty-state');
-  
-  let visibleCount = 0;
-
-  cards.forEach(card => {
-    const cardCat = card.dataset.category;
-    const cardName = card.dataset.name;
-    const matchesCat = activeCat === 'all' || cardCat === activeCat;
-    const matchesSearch = query === '' || cardName.includes(query);
-
-    if (matchesCat && matchesSearch) {
-      card.style.display = 'flex';
-      visibleCount++;
-    } else {
-      card.style.display = 'none';
-    }
-  });
-
-  if (emptyState) {
-    emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
-  }
-}
-
-/* Search input binding */
-function initSearch() {
-  const searchInput = document.getElementById('menu-search');
-  const clearBtn = document.getElementById('clear-search-btn');
-
-  searchInput.addEventListener('input', (e) => {
-    state.searchQuery = e.target.value;
-    clearBtn.classList.toggle('visible', state.searchQuery.length > 0);
-    filterMenu();
-  });
-
-  clearBtn.addEventListener('click', () => {
-    searchInput.value = '';
-    state.searchQuery = '';
-    clearBtn.classList.remove('visible');
-    searchInput.focus();
-    filterMenu();
-  });
-
-  // Reset filters button in empty states
-  document.querySelectorAll('.btn-reset-filters').forEach(btn => {
-    btn.addEventListener('click', () => {
-      searchInput.value = '';
-      state.searchQuery = '';
-      clearBtn.classList.remove('visible');
-      state.currentBevCat = 'all';
-      state.currentDishCat = 'all';
-      document.querySelectorAll('.filter-chip').forEach(c => {
-        c.classList.toggle('active', c.dataset.cat === 'all');
-      });
-      filterMenu();
-    });
-  });
-}
-
-/* 
-   R-31 WRITTEN REASON FOR SHOPPING CART ARCHITECTURE:
-   Deduplicates items by composite id (name + variant), updates badge counters,
-   and constructs pre-formatted WhatsApp orders for seamless direct checkout.
-*/
-function addToCart(itemData) {
-  const existing = state.cart.find(item => item.id === itemData.id);
-  if (existing) {
-    existing.qty += 1;
-  } else {
-    state.cart.push({ ...itemData });
-  }
-
-  updateCartUI();
-
-  // Subtle bounce animation on floating cart pill
-  const cartBar = document.getElementById('floating-cart-bar');
-  cartBar.classList.add('visible');
-  cartBar.style.transform = 'translate(-50%, -4px)';
-  setTimeout(() => {
-    cartBar.style.transform = 'translate(-50%, 0)';
-  }, 160);
-}
-
-function updateQty(id, delta) {
-  const itemIndex = state.cart.findIndex(i => i.id === id);
-  if (itemIndex === -1) return;
-
-  state.cart[itemIndex].qty += delta;
-  if (state.cart[itemIndex].qty <= 0) {
-    state.cart.splice(itemIndex, 1);
-  }
-
-  updateCartUI();
-}
-
-function clearCart() {
-  state.cart = [];
-  updateCartUI();
-}
-
-function updateCartUI() {
-  const totalCount = state.cart.reduce((sum, item) => sum + item.qty, 0);
-  const totalPrice = state.cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-
-  // Floating bar elements
-  const cartBar = document.getElementById('floating-cart-bar');
-  const countBadge = document.getElementById('cart-count-badge');
-  const barTotal = document.getElementById('cart-bar-total');
-
-  if (countBadge) countBadge.textContent = totalCount;
-  if (barTotal) barTotal.textContent = formatRupiah(totalPrice);
-
-  if (cartBar) {
-    cartBar.classList.toggle('visible', totalCount > 0);
-  }
-
-  // Drawer items list
-  const drawerList = document.getElementById('cart-items-list');
-  const drawerTotal = document.getElementById('cart-drawer-total');
-  const isEn = state.lang === 'en';
-
-  if (!drawerList) return;
-
-  if (state.cart.length === 0) {
-    drawerList.innerHTML = `
-      <div class="cart-empty-message">
-        <p>${isEn ? 'Your order is currently empty.' : 'Pesanan Anda masih kosong.'}</p>
-        <p style="font-size: 0.85rem; margin-top: 8px;">
-          ${isEn ? 'Explore our menu to add specialty coffee and Japanese dishes.' : 'Pilih menu kopi atau hidangan lezat untuk memulai pesanan.'}
-        </p>
-      </div>
-    `;
-    if (drawerTotal) drawerTotal.textContent = formatRupiah(0);
-    return;
-  }
-
-  drawerList.innerHTML = state.cart.map(item => `
-    <div class="cart-item">
-      <div class="cart-item-details">
-        <div class="cart-item-name">${item.name}</div>
-        ${item.variant ? `<div class="cart-item-sub">Variant: ${item.variant}</div>` : ''}
-        <div class="cart-item-price">${formatRupiah(item.price)}</div>
-      </div>
-      <div class="cart-item-controls">
-        <button type="button" class="qty-btn" onclick="updateQty('${item.id}', -1)" aria-label="Decrease quantity">-</button>
-        <span class="cart-item-qty">${item.qty}</span>
-        <button type="button" class="qty-btn" onclick="updateQty('${item.id}', 1)" aria-label="Increase quantity">+</button>
-      </div>
-    </div>
-  `).join('');
-
-  if (drawerTotal) drawerTotal.textContent = formatRupiah(totalPrice);
-}
-
-function toggleCartDrawer(open) {
-  const drawer = document.getElementById('cart-drawer');
-  const overlay = document.getElementById('cart-overlay');
-  const shouldOpen = open !== undefined ? open : !drawer.classList.contains('open');
-
-  drawer.classList.toggle('open', shouldOpen);
-  overlay.classList.toggle('open', shouldOpen);
-}
-
-/* WhatsApp Order Message Builder */
-function sendOrderWhatsApp() {
-  if (state.cart.length === 0) return;
-
-  const isEn = state.lang === 'en';
-  const totalPrice = state.cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-
-  let msg = '';
-  if (isEn) {
-    msg += 'Hello Kataru, I would like to order the following items:\n';
-    state.cart.forEach(item => {
-      const detail = item.variant ? ` (${item.variant})` : '';
-      msg += `${item.qty}x ${item.name}${detail} - ${formatRupiah(item.price * item.qty)}\n`;
-    });
-    msg += `\nTotal: ${formatRupiah(totalPrice)}`;
-  } else {
-    msg += 'Halo Kataru, saya ingin memesan menu berikut:\n';
-    state.cart.forEach(item => {
-      const detail = item.variant ? ` (${item.variant})` : '';
-      msg += `${item.qty}x ${item.name}${detail} - ${formatRupiah(item.price * item.qty)}\n`;
-    });
-    msg += `\nTotal: ${formatRupiah(totalPrice)}`;
-  }
-
-  const url = `https://wa.me/${WA_NUM}?text=${encodeURIComponent(msg)}`;
-  window.open(url, '_blank', 'noopener,noreferrer');
-}
-
-/* ==========================================================================
-   RESERVATION MODAL LOGIC
-   R-31: Accessible modal with focus trap, ESC listener, field validation,
-   and WhatsApp reservation link generation.
-   ========================================================================== */
-let lastActiveElement = null;
-
-function openModal() {
-  lastActiveElement = document.activeElement;
-  const overlay = document.getElementById('reservation-modal');
-  overlay.classList.add('open');
-  overlay.setAttribute('aria-hidden', 'false');
-
-  // Set default reservation date to today
-  const dateInput = document.getElementById('res-date');
-  if (dateInput && !dateInput.value) {
-    const today = new Date().toISOString().split('T')[0];
-    dateInput.value = today;
-  }
-
-  // Focus first input field inside modal
-  const firstInput = document.getElementById('res-name');
-  if (firstInput) firstInput.focus();
-
-  document.addEventListener('keydown', handleModalKeyDown);
-}
-
-function closeModal() {
-  const overlay = document.getElementById('reservation-modal');
-  overlay.classList.remove('open');
-  overlay.setAttribute('aria-hidden', 'true');
-
-  document.removeEventListener('keydown', handleModalKeyDown);
-
-  // Restore focus to triggering button
-  if (lastActiveElement && typeof lastActiveElement.focus === 'function') {
-    lastActiveElement.focus();
-  }
-}
-
-function handleModalKeyDown(e) {
-  if (e.key === 'Escape') {
-    closeModal();
-    return;
-  }
-
-  // Focus trap inside modal dialog
-  if (e.key === 'Tab') {
-    const dialog = document.querySelector('.modal-dialog');
-    const focusable = dialog.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
-
-    if (e.shiftKey) {
-      if (document.activeElement === first) {
-        last.focus();
-        e.preventDefault();
-      }
-    } else {
-      if (document.activeElement === last) {
-        first.focus();
-        e.preventDefault();
-      }
-    }
-  }
-}
-
-/* Handle Reservation Form Submission */
-function handleReservationSubmit(e) {
-  e.preventDefault();
-
-  const nameInput = document.getElementById('res-name');
-  const phoneInput = document.getElementById('res-phone');
-  const dateInput = document.getElementById('res-date');
-  const timeInput = document.getElementById('res-time');
-  const guestsInput = document.getElementById('res-guests');
-  const areaInput = document.querySelector('input[name="res-area"]:checked');
-  const notesInput = document.getElementById('res-notes');
-  const dialog = document.querySelector('.modal-dialog');
-
-  // Reset validation styles
-  const requiredFields = [nameInput, phoneInput, dateInput, timeInput, guestsInput];
-  let isValid = true;
-
-  requiredFields.forEach(field => {
-    if (!field || !field.value.trim()) {
-      field.classList.add('invalid');
-      isValid = false;
-    } else {
-      field.classList.remove('invalid');
-    }
-  });
-
-  if (!isValid) {
-    // Shake animation on error
-    dialog.classList.add('shake');
-    setTimeout(() => dialog.classList.remove('shake'), 400);
-
-    const firstInvalid = requiredFields.find(f => f.classList.contains('invalid'));
-    if (firstInvalid) firstInvalid.focus();
-    return;
-  }
-
-  const name = nameInput.value.trim();
-  const phone = phoneInput.value.trim();
-  const date = dateInput.value;
-  const time = timeInput.value;
-  const guests = guestsInput.value.trim();
-  const area = areaInput ? areaInput.value : 'Indoor (AC)';
-  const notes = notesInput && notesInput.value.trim() ? notesInput.value.trim() : (state.lang === 'en' ? 'None' : 'Tidak ada');
-
-  const isEn = state.lang === 'en';
-  let msg = '';
-
-  if (isEn) {
-    msg = `Hello Kataru, I would like to make a reservation:\n` +
-          `Name: ${name}\n` +
-          `WhatsApp: ${phone}\n` +
-          `Date & Time: ${date} at ${time}\n` +
-          `Guests: ${guests}\n` +
-          `Area: ${area}\n` +
-          `Notes: ${notes}`;
-  } else {
-    msg = `Halo Kataru, saya ingin reservasi:\n` +
-          `Nama: ${name}\n` +
-          `WhatsApp: ${phone}\n` +
-          `Tanggal & Jam: ${date} jam ${time}\n` +
-          `Jumlah Tamu: ${guests}\n` +
-          `Area: ${area}\n` +
-          `Catatan: ${notes}`;
-  }
-
-  const url = `https://wa.me/${WA_NUM}?text=${encodeURIComponent(msg)}`;
-  window.open(url, '_blank', 'noopener,noreferrer');
-  closeModal();
-}
-
-/* 
-   R-19 MOTION 2 SCROLL REVEALS:
-   Subtle reveal on scroll using IntersectionObserver.
-*/
-function initScrollReveals() {
-  if (!('IntersectionObserver' in window)) return;
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('revealed');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-}
-
-/* App Initialization */
-document.addEventListener('DOMContentLoaded', () => {
-  // Restore saved language or default to 'en'
-  let savedLang = 'en';
-  try {
-    savedLang = localStorage.getItem('kataru-lang') || 'en';
-  } catch (e) {}
-
-  setLanguage(savedLang);
-
-  initNavbar();
-  renderChips();
-  renderBeverages();
-  renderDishes();
-  renderAddons();
-  initMenuTabs();
-  initSearch();
-  initScrollReveals();
-
-  // Language toggle clicks
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
-  });
-
-  // Mobile navigation hamburger
-  const hamburgerBtn = document.getElementById('hamburger-btn');
-  if (hamburgerBtn) {
-    hamburgerBtn.addEventListener('click', () => toggleMobileMenu());
-  }
-
-  // Close mobile drawer when clicking navigation links
-  document.querySelectorAll('.mobile-nav-link').forEach(link => {
-    link.addEventListener('click', () => toggleMobileMenu(true));
-  });
-
-  // Modal open buttons
-  document.querySelectorAll('[data-open-modal]').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      toggleMobileMenu(true);
-      openModal();
-    });
-  });
-
-  // Modal close button and overlay click
-  const modalCloseBtn = document.getElementById('modal-close-btn');
-  const modalOverlay = document.getElementById('reservation-modal');
-  if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
-  if (modalOverlay) {
-    modalOverlay.addEventListener('click', (e) => {
-      if (e.target === modalOverlay) closeModal();
-    });
-  }
-
-  // Reservation form submit
-  const resForm = document.getElementById('reservation-form');
-  if (resForm) {
-    resForm.addEventListener('submit', handleReservationSubmit);
-  }
-
-  // Area radio card styling sync
-  document.querySelectorAll('input[name="res-area"]').forEach(radio => {
-    radio.addEventListener('change', () => {
-      document.querySelectorAll('.area-radio-card').forEach(card => {
-        card.classList.toggle('selected', card.querySelector('input').checked);
-      });
-    });
-  });
-
-  // Cart bar click to open drawer
-  const cartBar = document.getElementById('floating-cart-bar');
-  if (cartBar) {
-    cartBar.addEventListener('click', () => toggleCartDrawer(true));
-  }
-
-  // Cart close button and overlay
-  const cartCloseBtn = document.getElementById('cart-close-btn');
-  const cartOverlay = document.getElementById('cart-overlay');
-  if (cartCloseBtn) cartCloseBtn.addEventListener('click', () => toggleCartDrawer(false));
-  if (cartOverlay) cartOverlay.addEventListener('click', () => toggleCartDrawer(false));
-
-  // WhatsApp order checkout button
-  const waOrderBtn = document.getElementById('btn-wa-order');
-  if (waOrderBtn) {
-    waOrderBtn.addEventListener('click', sendOrderWhatsApp);
-  }
-});
-
-  </script>
-</body>
-</html>
+    const DISHES_DATA = [{"category": "Pasta Stories", "category_id": "pasta-stories", "category_id_name": "Kisah Pasta", "items": [{"name": "Chili Oil", "price": 35, "badges": ["Recommended"], "desc_en": "Al dente spaghetti tossed in homemade aromatic chili oil, garlic crunch, and scallions.", "desc_id": "Spaghetti al dente berbalut chili oil gurih buatan sendiri, bawang putih renyah, dan daun bawang."}, {"name": "Peanut Butter", "price": 39, "badges": [], "desc_en": "Japanese fusion noodles in savory peanut sesame sauce with chili crisp and minced chicken.", "desc_id": "Pasta fusion dengan saus kacang wijen gurih gurih, chili crisp, dan potongan ayam lembut."}, {"name": "Carbonara", "price": 39, "badges": ["Recommended"], "desc_en": "Classic creamy pasta with smoked beef bacon, egg yolk, and parmesan cheese.", "desc_id": "Pasta saus krim kental dengan smoked beef renyah, kuning telur, dan keju parmesan melimpah."}, {"name": "Bolognese", "price": 39, "badges": [], "desc_en": "Slow-simmered Australian minced beef in ripe tomato herb sauce over spaghetti.", "desc_id": "Daging sapi cincang Australia yang dimasak perlahan dengan saus tomat rempah kaya rasa."}]}, {"category": "Rice Bowls", "category_id": "rice-bowls", "category_id_name": "Mangkok Nasi", "items": [{"name": "Mozaru Rice", "variants": [{"label": "Hamburg", "price": 42}, {"label": "Chicken", "price": 49}], "badges": ["Recommended"], "desc_en": "Baked Japanese butter rice smothered in savory sauce and thick melted mozzarella cheese.", "desc_id": "Nasi mentega panggang khas Jepang diselimuti saus lezat dan keju mozzarella lumer melimpah."}, {"name": "Curry Rice", "variants": [{"label": "Chicken", "price": 39}, {"label": "Beef", "price": 45}], "badges": ["Recommended"], "desc_en": "Thick golden Japanese curry with slow-cooked carrots and potatoes over steamed rice.", "desc_id": "Kari Jepang kental gurih dengan wortel dan kentang empuk di atas nasi pulen hangat."}, {"name": "Teriyaki Donburi", "variants": [{"label": "Chicken", "price": 35}, {"label": "Beef", "price": 42}, {"label": "Salmon", "price": 49}], "badges": [], "desc_en": "Glazed meat of choice grilled with sweet soy mirin reduction on warm Japanese rice.", "desc_id": "Pilihan daging panggang berbalut saus teriyaki manis gurih di atas nasi hangat."}, {"name": "Salted Egg Donburi Chicken", "price": 39, "badges": [], "desc_en": "Crispy chicken popcorn drenched in creamy golden salted egg yolk sauce with curry leaves.", "desc_id": "Ayam krispi gurih disiram saus telur asin keemasan yang creamy dengan wangi daun kari."}, {"name": "Mentai Donburi Chicken", "price": 35, "badges": [], "desc_en": "Tender chicken cutlet smothered in torched spicy cod roe mayo over warm rice.", "desc_id": "Potongan ayam lembut diselimuti saus mentai gurih pedas yang dibakar aromatik."}, {"name": "Black Pepper Donburi Beef", "price": 42, "badges": [], "desc_en": "Sliced tender beef stir-fried with cracked black peppercorns, onions, and bell peppers.", "desc_id": "Irisan daging sapi empuk ditumis dengan lada hitam tumbuk kasar, bawang bombay, dan paprika."}, {"name": "Nanban Donburi Chicken", "price": 35, "badges": ["NEW", "Recommended"], "desc_en": "Crispy chicken soaked in sweet sour nanban vinegar topped with egg tartare sauce.", "desc_id": "Ayam goreng renyah berbalut cuka nanban manis asam disajikan dengan saus tartar telur segar."}, {"name": "Katsudon Chicken", "price": 37, "badges": ["NEW", "Recommended"], "desc_en": "Crispy breaded chicken cutlet simmered in dashi broth with beaten eggs and sweet onions.", "desc_id": "Katsu ayam renyah yang dimasak dalam kuah dashi gurih bersama telur kocok dan bawang bombay."}]}, {"category": "Yaki Dishes", "category_id": "yaki-dishes", "category_id_name": "Hidangan Panggang", "items": [{"name": "Yaki Meshi", "price": 26, "badges": [], "desc_en": "Japanese style wok-fried rice with egg, scallions, garlic, and savory dashi butter.", "desc_id": "Nasi goreng ala Jepang yang dimasak dengan api besar, telur, daun bawang, dan mentega dashi."}, {"name": "Yaki Soba", "price": 26, "badges": [], "desc_en": "Stir-fried wheat noodles with crisp cabbage, bean sprouts, and tangy Worcestershire soba sauce.", "desc_id": "Mi goreng gandum dengan kol renyah, tauge segar, dan saus soba gurih manis khas kedai malam."}, {"name": "Yakimeshi Curry", "price": 29, "badges": ["NEW", "Recommended"], "desc_en": "Wok-tossed fried rice infused with rich Japanese curry spices, minced meat, and eggs.", "desc_id": "Nasi goreng wajan bertabur bumbu kari Jepang harum dengan daging cincang dan telur gurih."}, {"name": "Yakimeshi Mentai", "price": 26, "badges": ["NEW"], "desc_en": "Savory fried rice crowned with torched creamy spicy mentai roe sauce.", "desc_id": "Nasi goreng gurih dengan topping saus mentai creamy yang di-torch wangi semerbak."}]}, {"category": "Yakitori (2pcs)", "category_id": "yakitori", "category_id_name": "Sate Jepang (2 tusuk)", "items": [{"name": "Tori Kawa", "price": 15, "badges": [], "desc_en": "Skewered chicken skin grilled until crackling crisp with tare glaze or sea salt.", "desc_id": "Kulit ayam renyah gurih dipanggang arang dengan olesan saus tare atau garam laut."}, {"name": "Negima", "price": 19, "badges": ["Recommended"], "desc_en": "Juicy chicken thigh chunks alternated with sweet charred Tokyo negi scallions.", "desc_id": "Paha ayam juicy berselang-seling dengan daun bawang Tokyo bakar yang manis."}, {"name": "Tsukune", "price": 24, "badges": [], "desc_en": "Handcrafted minced chicken meatballs seasoned with ginger, shiso, and tare glaze.", "desc_id": "Bola-bola daging ayam giling buatan tangan berbumbu jahe dan saus manis gurih."}, {"name": "Gyu Enoki", "price": 24, "badges": [], "desc_en": "Tender thinly-sliced beef wrapped around fresh crunchy enoki mushrooms.", "desc_id": "Irisan tipis daging sapi empuk membalut jamur enoki renyah berlumur saus panggang."}]}, {"category": "Small Bites", "category_id": "small-bites", "category_id_name": "Camilan", "items": [{"name": "Chicken Wings", "price": 29, "badges": [], "desc_en": "Crispy double-fried chicken wings glazed with savory garlic sweet sauce.", "desc_id": "Sayap ayam goreng renyah berbalut saus bawang manis gurih yang menggoda."}, {"name": "Chicken Karaage", "price": 24, "badges": ["Recommended"], "desc_en": "Bite-sized ginger garlic marinated chicken thighs fried crispy with Japanese kewpie mayo.", "desc_id": "Potongan paha ayam marinasi jahe bawang yang digoreng renyah dengan cocolan mayo kewpie."}, {"name": "Croquette", "variants": [{"label": "Beef", "price": 19}, {"label": "Salmon", "price": 24}], "badges": [], "desc_en": "Golden panko-crusted potato patty filled with savory minced beef or salmon.", "desc_id": "Kroket kentang lembut berlapis tepung roti keemasan berisi cincangan daging sapi atau salmon."}, {"name": "Mix Platter", "price": 55, "badges": ["Recommended"], "desc_en": "Sharing platter with crispy wings, chicken karaage, fries, and dipping sauces.", "desc_id": "Piring komplit untuk dinikmati bersama berisi sayap ayam, karaage, kentang goreng, dan aneka saus."}, {"name": "French Fries", "variants": [{"label": "Original", "price": 19}, {"label": "BBQ", "price": 21}, {"label": "Cheese", "price": 21}, {"label": "Seaweed", "price": 21}], "badges": ["NEW"], "desc_en": "Crispy golden straight-cut potato fries tossed in your favorite flavor seasoning.", "desc_id": "Kentang goreng renyah gurih bertabur bumbu pilihan favoritmu."}, {"name": "Ube Fries", "variants": [{"label": "Original", "price": 19}, {"label": "BBQ", "price": 21}, {"label": "Cheese", "price": 21}, {"label": "Seaweed", "price": 21}], "badges": ["NEW", "Recommended"], "desc_en": "Sweet purple yam fries fried until golden crisp on the outside, fluffy inside.", "desc_id": "Kentang ubi ungu manis alami yang digoreng garing di luar dan lembut di dalam."}, {"name": "Nachos", "price": 23, "badges": ["NEW"], "desc_en": "Crisp corn tortilla chips with warm melted cheese drizzle and house salsa.", "desc_id": "Keripik tortilla renyah dengan siraman saus keju hangat dan salsa segar."}]}, {"category": "Misoa Dishes", "category_id": "misoa-dishes", "category_id_name": "Hidangan Misoa", "items": [{"name": "Misoa Original", "price": 26, "badges": ["NEW"], "desc_en": "Silky thin wheat misoa noodles in rich clear chicken broth with soft egg and greens.", "desc_id": "Mi misoa lembut dalam kuah kaldu ayam bening yang kaya rasa dengan telur dan sayuran."}, {"name": "Misoa Spicy", "price": 29, "badges": ["NEW", "Recommended"], "desc_en": "Silky wheat misoa in aromatic spicy broth with chili oil, garlic, and poached egg.", "desc_id": "Mi misoa sutra dalam kuah pedas gurih dengan chili oil wangi, bawang putih, dan telur setengah matang."}]}, {"category": "Sushi & Sashimi", "category_id": "sushi-sashimi", "category_id_name": "Sushi & Sashimi", "items": [{"name": "Chicken Spicy Roll 4pcs", "price": 19, "badges": [], "desc_en": "Crispy chicken
